@@ -63,13 +63,22 @@ class Evaluate:
     # Write your code here
     value = True
     
+    operands = 0
+    operators = 0
+    
     valid = ['+','-','*','/']
     
     for char in expression:
-        if char.isdigit or char in valid:
-            continue
+        if char.isdigit:
+          operands += 1
+        elif char in valid:
+          operators += 1
         else:
             value = False
+            return value
+        
+        if operands + 1 == operators:
+          value = True
     
     return value
 
@@ -89,8 +98,8 @@ class Evaluate:
         if char.isdigit:
             self.push()
         else:
-            a = self.pop()
-            b = self.pop()
+            b = int(self.pop())
+            a = int(self.pop())
             
             if char == "+":
                 result = a + b
