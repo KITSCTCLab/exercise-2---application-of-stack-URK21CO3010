@@ -38,8 +38,9 @@ class Evaluate:
       The data which is popped out if the stack is not empty.
     """
     # Write your code here
-    x = self.stack.pop()
-    return x
+    if len(self.stack) > 0:
+        x = self.stack.pop()
+        return x
 
 
   def push(self, operand):
@@ -63,22 +64,13 @@ class Evaluate:
     # Write your code here
     value = True
     
-    operands = 0
-    operators = 0
-    
     valid = ['+','-','*','/']
     
     for char in expression:
-        if char.isdigit:
-          operands += 1
-        elif char in valid:
-          operators += 1
+        if char.isdigit or char in valid:
+            continue
         else:
             value = False
-            return value
-        
-        if operands + 1 == operators:
-          value = True
     
     return value
 
@@ -95,8 +87,8 @@ class Evaluate:
     # Write your code here
     
     for char in expression:
-        if char.isdigit:
-            self.push()
+        if char.isdigit():
+            self.push(char)
         else:
             b = int(self.pop())
             a = int(self.pop())
@@ -111,6 +103,8 @@ class Evaluate:
                 result = a / b
             
             self.push(result)
+    
+    return self.stack[0]
 
 
 # Do not change the following code
